@@ -17,10 +17,10 @@ class Program
             Console.WriteLine("1. Book a Ride");
             Console.WriteLine("2. Enter as Driver");
             Console.WriteLine("3. Enter as Admin");
-            Console.WriteLine("Press 1 to 3 to select an option:");
-
+            Console.Write("Press 1 to 3 to select an option:");
+            Console.ForegroundColor = ConsoleColor.Green;
             string choice = Console.ReadLine();
-
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             switch (choice)
             {
@@ -32,9 +32,14 @@ class Program
                     Driver driver = new Driver();
                     
                     Console.Write("Enter ID: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
                     int driverId = int.Parse(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    
                     Console.Write("Enter Name: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
                     string driverName = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.Gray; 
                     driver.EnterAsDriver(driverId, driverName,admin);
                     break;
                 case "3":
@@ -102,7 +107,9 @@ class Driver
         if (isRegistered)
         {
             Console.WriteLine($"Hello {name}!");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Enter your current Location (latitude,longitude): ");
+            Console.ForegroundColor = ConsoleColor.Gray;
             string[] locationInput = Console.ReadLine().Split(',');
 
             if (locationInput.Length == 2 && double.TryParse(locationInput[0], out double latitude) && double.TryParse(locationInput[1], out double longitude))
@@ -130,8 +137,9 @@ class Driver
             Console.WriteLine("2. Change Location");
             Console.WriteLine("3. Exit as Driver");
             Console.Write("Select an option (1-3): ");
-
+            Console.ForegroundColor = ConsoleColor.Green;
             int choice = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             switch (choice)
             {
@@ -153,7 +161,9 @@ class Driver
     private void UpdateAvailability()
     {
         Console.Write("Change availability to Available (Y/N): ");
+        Console.ForegroundColor = ConsoleColor.Green;
         char response = Console.ReadKey().KeyChar;
+        Console.ForegroundColor = ConsoleColor.Gray;
         if (response == 'Y' || response == 'y')
         {
             Availability = true;
@@ -170,7 +180,9 @@ class Driver
 
     private void UpdateLocation()
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter your new location (latitude,longitude): ");
+        Console.ForegroundColor = ConsoleColor.Gray;
         string[] locationInput = Console.ReadLine().Split(',');
 
         if (locationInput.Length == 2 && double.TryParse(locationInput[0], out double latitude) && double.TryParse(locationInput[1], out double longitude))
@@ -212,33 +224,45 @@ class Passenger
         Console.WriteLine("Book a Ride");
 
         Console.Write("Enter Name: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         Name = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrEmpty(Name))
         {
             Console.WriteLine("Name cannot be empty!! Please enter a valid name :)");
             Console.Write("Enter Name: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             Name = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.Write("Enter Phone no: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         PhoneNo = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (!IsValidPhoneNumber(PhoneNo))
         {
             Console.WriteLine("Invalid phone number!! Please enter a valid 11-digit phone number starting with '03':)");
             Console.Write("Enter Phone no: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             PhoneNo = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Location startLocation = GetLocationInput("Enter Start Location (latitude,longitude): ");
         Location endLocation = GetLocationInput("Enter End Location (latitude,longitude): ");
 
         Console.Write("Enter Ride Type (Car, Bike, Rickshaw): ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string rideType = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrEmpty(rideType) || !IsValidRideType(rideType))
         {
             Console.WriteLine("Invalid ride type!! Please enter Car, Bike, or Rickshaw :)");
             Console.Write("Enter Ride Type (Car, Bike, Rickshaw): ");
+            Console.ForegroundColor = ConsoleColor.Green;
             rideType = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.WriteLine("-------------------- THANK YOU ----------------------");
@@ -257,10 +281,13 @@ class Passenger
 
             Console.Write("Enter 'Y' if you want to Book the ride, enter 'N' if you want to cancel operation: ");
             char bookChoice;
+            Console.ForegroundColor = ConsoleColor.Green;
             while (!char.TryParse(Console.ReadKey().KeyChar.ToString().ToLower(), out bookChoice) || (bookChoice != 'y' && bookChoice != 'n'))
             {
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("\nInvalid input!! Please enter 'Y' or 'N' :)");
                 Console.Write("Enter 'Y' if you want to Book the ride, enter 'N' if you want to cancel operation: ");
+                Console.ForegroundColor = ConsoleColor.Green;
             }
 
             if (bookChoice == 'y')
@@ -279,19 +306,18 @@ class Passenger
     {
         return phoneNumber.Length == 11 && phoneNumber.StartsWith("03");
     }
-
-
     private bool IsValidRideType(string rideType)
     {
         string[] validRideTypes = { "car", "bike", "rickshaw" };
         return validRideTypes.Contains(rideType.ToLower());
     }
 
-
     private Location GetLocationInput(string prompt)
     {
         Console.Write(prompt);
+        Console.ForegroundColor = ConsoleColor.Green;
         string[] locationInput = Console.ReadLine().Split(',');
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         if (locationInput.Length != 2 || !double.TryParse(locationInput[0], out double latitude) || !double.TryParse(locationInput[1], out double longitude))
         {
@@ -305,7 +331,9 @@ class Passenger
     private int GiveRating()
     {
         Console.Write("Give rating out of 5: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         int rating = int.Parse(Console.ReadLine());
+        Console.ForegroundColor = ConsoleColor.Gray;
         if (rating < 1 || rating > 5)
         {
             Console.WriteLine("Invalid rating!! Please enter a rating between 1 and 5 :)");
@@ -436,7 +464,9 @@ class Admin
             Console.WriteLine("5. Exit as Admin");
             Console.Write("Select an option (1-5): ");
 
+            Console.ForegroundColor = ConsoleColor.Green;
             int adminChoice = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             switch (adminChoice)
             {
@@ -469,68 +499,98 @@ class Admin
         int driverId;
         do
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter Driver ID: ");
+            Console.ForegroundColor = ConsoleColor.Green;
         } while (!int.TryParse(Console.ReadLine(), out driverId) || driverId <= 0);
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Name: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string name = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrWhiteSpace(name))
         {
             Console.WriteLine("Invalid input!! Please enter a non-empty name :)");
             Console.Write("Enter Name: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             name = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         int age;
         do
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter Age: ");
+            Console.ForegroundColor = ConsoleColor.Green;
         } while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 70);
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Gender: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string gender = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrWhiteSpace(gender) || (gender.ToLower() != "male" && gender.ToLower() != "female"))
         {
             Console.WriteLine("Invalid input!! Please enter 'Male' or 'Female' for gender :)");
             Console.Write("Enter Gender: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             gender = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.Write("Enter Address: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string address = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrWhiteSpace(address))
         {
             Console.WriteLine("Invalid input!! Please enter a non-empty address :)");
             Console.Write("Enter Address: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             address = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.Write("Enter Vehicle Type (Car, Bike, Rickshaw): ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string vehicleType = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         while (string.IsNullOrWhiteSpace(vehicleType) || !IsVehicleTypeValid(vehicleType))
         {
             Console.WriteLine("Invalid input!! Please enter a valid vehicle type (Car, Bike, Rickshaw) :) ");
             Console.Write("Enter Vehicle Type: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             vehicleType = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.Write("Enter Vehicle Model: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string vehicleModel = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrWhiteSpace(vehicleModel))
         {
             Console.WriteLine("Invalid input!! Please enter a non-empty vehicle model :)");
             Console.Write("Enter Vehicle Model: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             vehicleModel = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Console.Write("Enter Vehicle License Plate: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string licensePlate = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
         while (string.IsNullOrWhiteSpace(licensePlate))
         {
             Console.WriteLine("Invalid input!! Please enter a non-empty license plate :)");
             Console.Write("Enter Vehicle License Plate: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             licensePlate = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         Driver newDriver = new Driver
@@ -554,12 +614,15 @@ class Admin
     }
     private void RemoveDriver()
     {
-        Console.WriteLine("Enter Driver ID to remove :");
+        Console.Write("Enter Driver ID to remove :");
         int driverId;
+        Console.ForegroundColor = ConsoleColor.Green;
         while (!int.TryParse(Console.ReadLine(), out driverId) || driverId <= 0)
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Invalid input!! Please enter a valid driver ID :)");
             Console.Write("Enter Driver ID to remove: ");
+            Console.ForegroundColor = ConsoleColor.Green;
         }
 
         Driver driverToRemove = Drivers.FirstOrDefault(d => d.Id == driverId);
@@ -571,6 +634,7 @@ class Admin
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Driver not found with the given ID.");
         }
     }
@@ -579,10 +643,13 @@ class Admin
     {
         Console.Write("\nEnter Driver ID to update: ");
         int driverId;
+        Console.ForegroundColor = ConsoleColor.Green;
         while (!int.TryParse(Console.ReadLine(), out driverId) || driverId <= 0)
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Invalid input!! Please enter a valid driver ID :)");
             Console.Write("Enter Driver ID to update: ");
+            Console.ForegroundColor = ConsoleColor.Green;
         }
 
         Driver driverToUpdate = Drivers.FirstOrDefault(d => d.Id == driverId);
@@ -592,77 +659,107 @@ class Admin
             Console.WriteLine($"\n-------------Driver with ID {driverId} exists-------------");
 
             Console.Write("Enter Name: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string name = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
+
             while (string.IsNullOrWhiteSpace(name))
             {
                 Console.WriteLine("Invalid input!! Please enter a non-empty name :)");
                 Console.Write("Enter Name: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 name = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Name = name;
 
            Console.Write("Enter Age: ");
+           Console.ForegroundColor = ConsoleColor.Green;
            string ageInput = Console.ReadLine();
+              Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrEmpty(ageInput) || !int.TryParse(ageInput, out int age) || age < 18 || age > 70)
             {
                 Console.WriteLine("Invalid input!! Please enter a valid age as a positive integer :)");
                 Console.Write("Enter Age: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 ageInput = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Age = int.Parse(ageInput);
 
             Console.Write("Enter Gender: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string gender = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
             while (string.IsNullOrWhiteSpace(gender) || (gender.ToLower() != "male" && gender.ToLower() != "female"))
             {
                 Console.WriteLine("Invalid input!! Please enter 'Male' or 'Female' for gender :)");
                 Console.Write("Enter Gender: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 gender = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Gender = gender;
 
             Console.Write("Enter Address: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string address = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrWhiteSpace(address))
             {
                 Console.WriteLine("Invalid input!! Please enter a non-empty address :)");
                 Console.Write("Enter Address: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 address = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Address = address;
 
             Console.Write("Enter Vehicle Type (Car, Bike, Rickshaw): ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string vehicleType = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrWhiteSpace(vehicleType) || !IsVehicleTypeValid(vehicleType))
             {
                 Console.WriteLine("Invalid input!! Please enter a non-empty and valid vehicle type (Car, Bike, Rickshaw) :)");
                 Console.Write("Enter Vehicle Type: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 vehicleType = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Vehicle.Type = vehicleType;
 
             Console.Write("Enter Vehicle Model: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string vehicleModel = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrWhiteSpace(vehicleModel))
             {
                 Console.WriteLine("Invalid input!! Please enter a non-empty vehicle model :)");
                 Console.Write("Enter Vehicle Model: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 vehicleModel = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             driverToUpdate.Vehicle.Model = vehicleModel;
 
             Console.Write("Enter Vehicle License Plate: ");
+            Console.ForegroundColor = ConsoleColor.Green;
             string licensePlate = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrWhiteSpace(licensePlate))
             {
                 Console.WriteLine("Invalid input!! Please enter a non-empty and valid license plate :)");
                 Console.Write("Enter Vehicle License Plate: ");
+                Console.ForegroundColor = ConsoleColor.Green;
                 licensePlate = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
+
             }
             driverToUpdate.Vehicle.LicensePlate = licensePlate;
 
@@ -670,6 +767,7 @@ class Admin
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Driver not found with the given ID.");
         }
     }
@@ -678,28 +776,45 @@ class Admin
         Console.WriteLine("\nSearch Driver:");
 
         Console.Write("Enter Driver ID: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         int searchDriverId = int.Parse(Console.ReadLine());
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Name: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchName = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Age: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchAgeInput = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Gender: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchGender = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Address: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchAddress = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Vehicle Type: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchVehicleType = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         Console.Write("Enter Vehicle Model: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchVehicleModel = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
+        
 
         Console.Write("Enter Vehicle License Plate: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string searchLicensePlate = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         var searchResults = Drivers.Where(d =>
                 (searchDriverId == 0 || d.Id == searchDriverId) &&
