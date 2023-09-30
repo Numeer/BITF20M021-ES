@@ -30,17 +30,17 @@ class Program
                     break;
                 case "2":
                     Driver driver = new Driver();
-                    
+
                     Console.Write("Enter ID: ");
                     Console.ForegroundColor = ConsoleColor.Green;
                     int driverId = int.Parse(Console.ReadLine());
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    
+
                     Console.Write("Enter Name: ");
                     Console.ForegroundColor = ConsoleColor.Green;
                     string driverName = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.Gray; 
-                    driver.EnterAsDriver(driverId, driverName,admin);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    driver.EnterAsDriver(driverId, driverName, admin);
                     break;
                 case "3":
                     admin.DisplayAdminMenu();
@@ -99,7 +99,7 @@ class Driver
         Availability = true;
     }
 
-    public void EnterAsDriver(int driverId, string name,Admin admin)
+    public void EnterAsDriver(int driverId, string name, Admin admin)
     {
         bool isRegistered = CheckDriverRegistration(driverId, name, admin);
         Console.WriteLine(isRegistered);
@@ -195,8 +195,8 @@ class Driver
             Console.WriteLine("Invalid location input!! Location not updated:)");
         }
     }
-    
-    public bool CheckDriverRegistration(int driverId, string name,Admin admin)
+
+    public bool CheckDriverRegistration(int driverId, string name, Admin admin)
     {
         List<Driver> driversList = admin.Drivers;
         return driversList.Any(driver => driver.Id == driverId && driver.Name == name);
@@ -403,7 +403,7 @@ class Ride
 
     public int CalculatePrice(string rideType)
     {
-        double fuelPrice = 332; 
+        double fuelPrice = 332;
         double commission;
 
         double distance = CalculateDistance(StartLocation, EndLocation);
@@ -416,11 +416,11 @@ class Ride
                 commission = 0.20;
                 break;
             case "bike":
-                fuelAverage = 50; 
+                fuelAverage = 50;
                 commission = 0.05;
                 break;
             case "rickshaw":
-                fuelAverage = 35; 
+                fuelAverage = 35;
                 commission = 0.10;
                 break;
             default:
@@ -673,10 +673,10 @@ class Admin
             }
             driverToUpdate.Name = name;
 
-           Console.Write("Enter Age: ");
-           Console.ForegroundColor = ConsoleColor.Green;
-           string ageInput = Console.ReadLine();
-              Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Enter Age: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            string ageInput = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             while (string.IsNullOrEmpty(ageInput) || !int.TryParse(ageInput, out int age) || age < 18 || age > 70)
             {
@@ -809,7 +809,7 @@ class Admin
         Console.ForegroundColor = ConsoleColor.Green;
         string searchVehicleModel = Console.ReadLine();
         Console.ForegroundColor = ConsoleColor.Gray;
-        
+
 
         Console.Write("Enter Vehicle License Plate: ");
         Console.ForegroundColor = ConsoleColor.Green;
