@@ -90,146 +90,190 @@ class Program
 
     static void AddEmployee(string connectionString)
     {
-        Console.WriteLine("Enter employee details:");
-
-        string firstName;
-        do
+        try
         {
-            Console.Write("First Name: ");
-            firstName = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(firstName));
+            Console.WriteLine("Enter employee details:");
 
-        string lastName;
-        do
-        {
-            Console.Write("Last Name: ");
-            lastName = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(lastName));
-
-        string email;
-        do
-        {
-            Console.Write("Email: ");
-            email = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email));
-
-        string primaryPhoneNumber;
-        do
-        {
-            Console.Write("Primary Phone Number: ");
-            primaryPhoneNumber = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(primaryPhoneNumber) || !IsValidPhoneNumber(primaryPhoneNumber));
-
-        string createdBy;
-        do
-        {
-            Console.Write("Created By: ");
-            createdBy = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(createdBy));
-
-        DateTime createdOn = DateTime.Now;
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            string query = "INSERT INTO Employees (FirstName, LastName, Email, PrimaryPhoneNumber, CreatedBy, CreatedOn) " +
-                           "VALUES (@FirstName, @LastName, @Email, @PrimaryPhoneNumber, @CreatedBy, @CreatedOn)";
-
-            using (SqlCommand command = new SqlCommand(query, connection))
+            string firstName;
+            do
             {
-                command.Parameters.AddWithValue("@FirstName", firstName);
-                command.Parameters.AddWithValue("@LastName", lastName);
-                command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@PrimaryPhoneNumber", primaryPhoneNumber);
-                command.Parameters.AddWithValue("@CreatedBy", createdBy);
-                command.Parameters.AddWithValue("@CreatedOn", createdOn);
+                Console.Write("First Name: ");
+                firstName = Console.ReadLine() ?? "";
+            } while (string.IsNullOrWhiteSpace(firstName));
 
-                int rowsAffected = command.ExecuteNonQuery();
+            string lastName;
+            do
+            {
+                Console.Write("Last Name: ");
+                lastName = Console.ReadLine() ?? "";
+            } while (string.IsNullOrWhiteSpace(lastName));
 
-                if (rowsAffected > 0)
+            string email;
+            do
+            {
+                Console.Write("Email: ");
+                email = Console.ReadLine() ?? "";
+            } while (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email));
+
+            string primaryPhoneNumber;
+            do
+            {
+                Console.Write("Primary Phone Number: ");
+                primaryPhoneNumber = Console.ReadLine() ?? "";
+            } while (string.IsNullOrWhiteSpace(primaryPhoneNumber) || !IsValidPhoneNumber(primaryPhoneNumber));
+
+            Console.Write("Secondary Phone no: ");
+            string secondaryPhoneNumber = Console.ReadLine() ?? "";
+
+            string createdBy;
+            do
+            {
+                Console.Write("Created By: ");
+                createdBy = Console.ReadLine() ?? "";
+            } while (string.IsNullOrWhiteSpace(createdBy));
+
+            DateTime createdOn = DateTime.Now;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO Employees (FirstName, LastName, Email, PrimaryPhoneNumber, SecondaryPhoneNumber, CreatedBy, CreatedOn) " +
+                               "VALUES (@FirstName, @LastName, @Email, @PrimaryPhoneNumber, @SecondaryPhoneNumber, @CreatedBy, @CreatedOn)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    Console.WriteLine("Record inserted successfully \n");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to insert the record :( \n");
+                    command.Parameters.AddWithValue("@FirstName", firstName);
+                    command.Parameters.AddWithValue("@LastName", lastName);
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@PrimaryPhoneNumber", primaryPhoneNumber);
+                    command.Parameters.AddWithValue("@SecondaryPhoneNumber", secondaryPhoneNumber);
+                    command.Parameters.AddWithValue("@CreatedBy", createdBy);
+                    command.Parameters.AddWithValue("@CreatedOn", createdOn);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Record inserted successfully \n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to insert the record :( \n");
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
 
     static void DeleteEmployee(string connectionString)
     {
-        Console.Write("Enter the ID of the employee to delete:");
-        int employeeIdToDelete;
-        while (!int.TryParse(Console.ReadLine(), out employeeIdToDelete))
+        try
         {
-            Console.Write("Invalid input!! Please enter a valid numeric ID :)");
-        }
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            string query = "DELETE FROM Employees WHERE ID = @EmployeeId";
-
-            using (SqlCommand command = new SqlCommand(query, connection))
+            Console.Write("Enter the ID of the employee to delete:");
+            int employeeIdToDelete;
+            while (!int.TryParse(Console.ReadLine(), out employeeIdToDelete))
             {
-                command.Parameters.AddWithValue("@EmployeeId", employeeIdToDelete);
+                Console.Write("Invalid input!! Please enter a valid numeric ID :)");
+            }
 
-                int rowsAffected = command.ExecuteNonQuery();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-                if (rowsAffected > 0)
+                string query = "DELETE FROM Employees WHERE ID = @EmployeeId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    Console.WriteLine($"Record with ID {employeeIdToDelete} deleted successfully \n");
-                }
-                else
-                {
-                    Console.WriteLine($"No record found with ID {employeeIdToDelete}. Deletion failed :( \n");
+                    command.Parameters.AddWithValue("@EmployeeId", employeeIdToDelete);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine($"Record with ID {employeeIdToDelete} deleted successfully \n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No record found with ID {employeeIdToDelete}. Deletion failed :( \n");
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
 
     static void SelectEmployeeById(string connectionString)
     {
-        Console.Write("Enter the ID of the employee to Search");
-        int employeeIdToSelect;
-        while (!int.TryParse(Console.ReadLine(), out employeeIdToSelect))
+        try
         {
-            Console.Write("Invalid input!! Please enter a valid numeric ID :)");
-        }
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            string query = "SELECT * FROM Employees WHERE ID = @EmployeeId";
-
-            using (SqlCommand command = new SqlCommand(query, connection))
+            Console.Write("Enter the ID of the employee to Search");
+            int employeeIdToSelect;
+            while (!int.TryParse(Console.ReadLine(), out employeeIdToSelect))
             {
-                command.Parameters.AddWithValue("@EmployeeId", employeeIdToSelect);
+                Console.Write("Invalid input!! Please enter a valid numeric ID :)");
+            }
 
-                using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM Employees WHERE ID = @EmployeeId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    if (reader.HasRows)
+                    command.Parameters.AddWithValue("@EmployeeId", employeeIdToSelect);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
-                            Console.WriteLine($"ID: {reader["ID"]}, FirstName: {reader["FirstName"]}, LastName: {reader["LastName"]}, " +
-                                              $"Email: {reader["Email"]}, PrimaryPhoneNumber: {reader["PrimaryPhoneNumber"]}, " +
-                                              $"SecondaryPhoneNumber: {reader["SecondaryPhoneNumber"]}, CreatedBy: {reader["CreatedBy"]}, " +
-                                              $"CreatedOn: {reader["CreatedOn"]}, ModifiedBy: {reader["ModifiedBy"]}, ModifiedOn: {reader["ModifiedOn"]}");
+                            while (reader.Read())
+                            {
+                                Console.WriteLine($"ID: {reader["ID"]}, FirstName: {reader["FirstName"]}, LastName: {reader["LastName"]}, " +
+                                                  $"Email: {reader["Email"]}, PrimaryPhoneNumber: {reader["PrimaryPhoneNumber"]}, " +
+                                                  $"SecondaryPhoneNumber: {reader["SecondaryPhoneNumber"]}, CreatedBy: {reader["CreatedBy"]}, " +
+                                                  $"CreatedOn: {reader["CreatedOn"]}, ModifiedBy: {reader["ModifiedBy"]}, ModifiedOn: {reader["ModifiedOn"]}");
+                            }
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"No record found with ID {employeeIdToSelect} :( \n");
+                        else
+                        {
+                            Console.WriteLine($"No record found with ID {employeeIdToSelect} :( \n");
+                        }
                     }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+    static bool EmployeeExists(string connectionString, int employeeId)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string query = "SELECT COUNT(*) FROM Employees WHERE ID = @EmployeeId";
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@EmployeeId", employeeId);
+                int count = (int)command.ExecuteScalar();
+
+                return count > 0;
+            }
+        }
+
     }
 
     static void UpdateEmployee(string connectionString)
@@ -241,6 +285,12 @@ class Program
         {
             Console.Write("Employee ID to update: ");
         } while (!int.TryParse(Console.ReadLine(), out employeeIdToUpdate));
+
+        if (!EmployeeExists(connectionString, employeeIdToUpdate))
+        {
+            Console.WriteLine($"No record found with ID {employeeIdToUpdate}!! Update failed :( \n");
+            return;
+        }
 
         string updatedFirstName;
         do
@@ -281,37 +331,44 @@ class Program
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Open();
-
-            string query = "UPDATE Employees SET " +
-                           "FirstName = @UpdatedFirstName, " +
-                           "LastName = @UpdatedLastName, " +
-                           "Email = @UpdatedEmail, " +
-                           "PrimaryPhoneNumber = @UpdatedPrimaryPhoneNumber, " +
-                           "ModifiedBy = @ModifiedBy, " +
-                           "ModifiedOn = @ModifiedOn " +
-                           "WHERE ID = @EmployeeId";
-
-            using (SqlCommand command = new SqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@UpdatedFirstName", updatedFirstName);
-                command.Parameters.AddWithValue("@UpdatedLastName", updatedLastName);
-                command.Parameters.AddWithValue("@UpdatedEmail", updatedEmail);
-                command.Parameters.AddWithValue("@UpdatedPrimaryPhoneNumber", updatedPrimaryPhoneNumber);
-                command.Parameters.AddWithValue("@ModifiedBy", modifiedBy);
-                command.Parameters.AddWithValue("@ModifiedOn", modifiedOn);
-                command.Parameters.AddWithValue("@EmployeeId", employeeIdToUpdate);
+                connection.Open();
 
-                int rowsAffected = command.ExecuteNonQuery();
+                string query = "UPDATE Employees SET " +
+                               "FirstName = @UpdatedFirstName, " +
+                               "LastName = @UpdatedLastName, " +
+                               "Email = @UpdatedEmail, " +
+                               "PrimaryPhoneNumber = @UpdatedPrimaryPhoneNumber, " +
+                               "ModifiedBy = @ModifiedBy, " +
+                               "ModifiedOn = @ModifiedOn " +
+                               "WHERE ID = @EmployeeId";
 
-                if (rowsAffected > 0)
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    Console.WriteLine($"Record with ID {employeeIdToUpdate} updated successfully \n");
+                    command.Parameters.AddWithValue("@UpdatedFirstName", updatedFirstName);
+                    command.Parameters.AddWithValue("@UpdatedLastName", updatedLastName);
+                    command.Parameters.AddWithValue("@UpdatedEmail", updatedEmail);
+                    command.Parameters.AddWithValue("@UpdatedPrimaryPhoneNumber", updatedPrimaryPhoneNumber);
+                    command.Parameters.AddWithValue("@ModifiedBy", modifiedBy);
+                    command.Parameters.AddWithValue("@ModifiedOn", modifiedOn);
+                    command.Parameters.AddWithValue("@EmployeeId", employeeIdToUpdate);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine($"Record with ID {employeeIdToUpdate} updated successfully \n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No record found with ID {employeeIdToUpdate}!! Update failed :( \n");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine($"No record found with ID {employeeIdToUpdate}!! Update failed :( \n");
-                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
     }
