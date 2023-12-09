@@ -1,3 +1,11 @@
+/*The Flyweight uses sharing to support large numbers of 
+objects efficiently. Modern web browsers use this technique 
+to prevent loading same images twice. When browser loads a web page, 
+it traverse through all images on that page. Browser loads all new 
+images from Internet and places them the internal cache. For already 
+loaded images, a flyweight object is created, which has some unique data 
+like position within the page, but everything else is referenced to the cached one.
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

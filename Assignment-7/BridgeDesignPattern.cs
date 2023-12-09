@@ -1,3 +1,12 @@
+/*The Bridge pattern decouples an abstraction from its implementation, 
+so that the two can vary independently. A household switch controlling 
+lights, ceiling fans, etc. is an example of the Bridge. The purpose of 
+the switch is to turn a device on or off. The actual switch can be 
+implemented as a pull chain, simple two position switch, or a variety of dimmer switches.
+Video and Video Processing are two different abstractions and they can
+be configured independently. Video can be configured to use different
+implementations of Video Processing and vice versa.*/
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

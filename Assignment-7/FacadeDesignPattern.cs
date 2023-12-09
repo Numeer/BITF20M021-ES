@@ -1,3 +1,10 @@
+/*The Facade defines a unified, higher level interface to a subsystem 
+that makes it easier to use. Consumers encounter a Facade when ordering 
+from a catalog. The consumer calls one number and speaks with a customer 
+service representative. The customer service representative acts as a Facade, 
+providing an interface to the order fulfillment department, the billing department, 
+and the shipping department.
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

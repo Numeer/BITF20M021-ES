@@ -1,3 +1,6 @@
+/*The Decorator attaches additional responsibilities to an object dynamically. 
+assault gun is a deadly weapon on it's own. But you can apply certain "decorations" to make it more accurate, silent and devastating.
+Simple pizza, with cheese ,with pepperoni*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

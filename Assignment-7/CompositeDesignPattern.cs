@@ -1,3 +1,10 @@
+/*The Composite composes objects into tree structures and 
+lets clients treat individual objects and compositions uniformly. 
+Although the example is abstract, arithmetic expressions are Composites. 
+An arithmetic expression consists of an operand, an operator (+ - * /), 
+and another operand. The operand can be a number, or another arithmetic expression. 
+Thus, 2 + 3 and (2 + 3) + (4 * 6) are both valid expressions.
+Component, Leaf and Composite*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
