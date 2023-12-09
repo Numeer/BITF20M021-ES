@@ -1,3 +1,10 @@
+/*The Iterator provides ways to access elements of an aggregate object 
+sequentially without exposing the underlying structure of the object.
+Consider watching television in a hotel room in a strange city.
+When surfing through channels, the channel number is not important, 
+but the programming is. If the programming on one channel is not of interest, 
+the viewer can request the next channel, without knowing its number.
+*/
 using System;
 using System.Collections;
 using System.Collections.Generic;

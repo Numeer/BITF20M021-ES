@@ -1,3 +1,11 @@
+/*The State pattern allows an object to change its behavior
+when its internal state changes. This pattern can be observed
+in a vending machine. Vending machines have states based on 
+the inventory, amount of currency deposited, the ability to make change,
+the item selected, etc. When currency is deposited and a selection is made, 
+a vending machine will either deliver a product and no change, 
+deliver a product and change, deliver no product due to insufficient 
+currency on deposit, or deliver no product due to inventory depletion.*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

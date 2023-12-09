@@ -1,3 +1,7 @@
+/*The Observer defines a one-to-many relationship so that when 
+one object changes state, the others are notified and updated automatically. 
+Subscriber and non subscribers when someone unsubscribe he/she 
+didin't notified with any notifications*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

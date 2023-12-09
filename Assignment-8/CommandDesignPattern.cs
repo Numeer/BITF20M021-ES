@@ -1,3 +1,8 @@
+/* Command decouples the object that invokes the operation from the one that knows how to perform it.
+The base class contains an execute() method that simply calls the action on the receiver.
+Command objects can be thought of as "tokens" that are created by one client that knows what need to be done, 
+and passed to another client that has the resources for doing it.
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

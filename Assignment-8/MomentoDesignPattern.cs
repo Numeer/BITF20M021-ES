@@ -1,3 +1,7 @@
+/*Need to restore an object back to its previous state (e.g. "undo" or "rollback" operations).
+The Memento captures and externalizes an object's internal state 
+so that the object can later be restored to that state
+*/
 using System;
 using System.Collections;
 using System.Collections.Generic;

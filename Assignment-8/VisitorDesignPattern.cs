@@ -1,3 +1,10 @@
+/*The Visitor pattern represents an operation to be performed 
+on the elements of an object structure without changing the 
+classes on which it operates. This pattern can be observed in 
+the operation of a taxi company. When a person calls a taxi 
+company (accepting a visitor), the company dispatches a cab to 
+the customer. Upon entering the taxi the customer, or Visitor, 
+is no longer in control of his or her own transportation, the taxi (driver) is.*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

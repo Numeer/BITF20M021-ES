@@ -1,3 +1,9 @@
+/*The Template Method defines a skeleton of an algorithm in an operation, 
+and defers some steps to subclasses. Home builders use the Template Method 
+when developing a new subdivision. A typical subdivision consists of a limited 
+number of floor plans with different variations available for each. Within a
+floor plan, the foundation, framing, plumbing, and wiring will be identical 
+for each house. Variation is introduced in the later stages of construction to produce a wider variety of models.*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

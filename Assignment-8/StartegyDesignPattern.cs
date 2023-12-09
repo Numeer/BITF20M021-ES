@@ -1,3 +1,9 @@
+/*A Strategy defines a set of algorithms that can be used interchangeably.
+ Modes of transportation to an airport is an example of a Strategy.
+ Several options exist such as driving one's own car, taking a taxi, 
+ an airport shuttle, a city bus, or a limousine service.
+ The traveler must choose the Strategy based on trade-offs
+ between cost, convenience, and time.*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

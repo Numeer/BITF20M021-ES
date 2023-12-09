@@ -1,3 +1,13 @@
+/*The Mediator defines an object that controls how a set of objects interact. 
+Loose coupling between colleague objects is achieved by having colleagues 
+communicate with the Mediator, rather than with each other. The control 
+tower at a controlled airport demonstrates this pattern very well. 
+The pilots of the planes approaching or departing the terminal area 
+communicate with the tower rather than explicitly communicating with one another. 
+The constraints on who can take off or land are enforced by the tower. 
+It is important to note that the tower does not control the whole flight. 
+It exists only to enforce constraints in the terminal area.
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

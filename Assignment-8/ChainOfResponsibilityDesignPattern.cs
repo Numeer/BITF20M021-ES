@@ -1,3 +1,9 @@
+// Chain of Responsibility simplifies object interconnections. 
+// Instead of senders and receivers maintaining references to all candidate receivers, 
+// each sender keeps a single reference to the head of the chain,
+// and each receiver keeps a single reference to its immediate successor in the chain.
+// Such as interviewing process, if the first interviewer cannot approve the candidate,
+// then the candidate will be send back.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

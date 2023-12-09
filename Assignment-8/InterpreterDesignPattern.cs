@@ -1,3 +1,8 @@
+/*A class of problems occurs repeatedly in a well-defined and well-understood domain.
+If the domain were characterized with a "language", then problems could be easily solved with an interpretation "engine".
+The pattern uses a class to represent each grammar rule. 
+And since grammars are usually hierarchical in structure, an inheritance hierarchy of rule classes maps nicely.
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
